@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net47;net461</TargetFrameworks>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <PackageReleaseNotes>$releaseNotes$</PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Sustainsys/Saml2</PackageProjectUrl>
@@ -23,10 +23,13 @@
   <PropertyGroup>
     <NoWarn>1701;1702;1591</NoWarn>
     <Authors>Sustainsys</Authors>
+    <Version>2.7.0.6</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\VersionInfo.cs" Link="VersionInfo.cs" />
+    <!--JNi 9/2020: Removed to allow building.-->
+    <!--<Compile Include="..\VersionInfo.cs" Link="VersionInfo.cs" />-->
     <None Include="..\nuget\sustainsys.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 

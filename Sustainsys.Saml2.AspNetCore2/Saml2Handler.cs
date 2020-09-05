@@ -52,7 +52,7 @@ namespace Sustainsys.Saml2.AspNetCore2
         /// <InheritDoc />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1500:VariableNamesShouldNotMatchFieldNames", MessageId = "scheme")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1500:VariableNamesShouldNotMatchFieldNames", MessageId = "context")]
-        public Task InitializeAsync(AuthenticationScheme scheme, HttpContext context)
+        public virtual Task InitializeAsync(AuthenticationScheme scheme, HttpContext context)
         {
             this.context = context ?? throw new ArgumentNullException(nameof(context));
 
@@ -65,7 +65,7 @@ namespace Sustainsys.Saml2.AspNetCore2
 
         /// <InheritDoc />
         [ExcludeFromCodeCoverage]
-        public Task<AuthenticateResult> AuthenticateAsync()
+        public virtual Task<AuthenticateResult> AuthenticateAsync()
         {
             throw new NotImplementedException();
         }
@@ -80,7 +80,7 @@ namespace Sustainsys.Saml2.AspNetCore2
         }
 
         /// <InheritDoc />
-        public async Task ChallengeAsync(AuthenticationProperties properties)
+        public virtual async Task ChallengeAsync(AuthenticationProperties properties)
         {
             properties = properties ?? new AuthenticationProperties();
 
@@ -115,14 +115,14 @@ namespace Sustainsys.Saml2.AspNetCore2
         }
 
         /// <InheritDoc />
-        public async Task<bool> HandleRequestAsync()
+        public virtual async Task<bool> HandleRequestAsync()
         {
             if (context.Request.Path.StartsWithSegments(options.SPOptions.ModulePath, StringComparison.Ordinal))
             {
                 var commandName = context.Request.Path.Value.Substring(
                     options.SPOptions.ModulePath.Length).TrimStart('/');
 
-                var commandResult = CommandFactory.GetCommand(commandName).Run(
+                var commandResult = this.GetCommand(commandName).Run(
                     context.ToHttpRequestData(options.CookieManager, dataProtector.Unprotect), options);
 
                 await commandResult.Apply(
@@ -134,12 +134,22 @@ namespace Sustainsys.Saml2.AspNetCore2
         }
 
         /// <summary>
+        /// IF added.
+        /// </summary>
+        /// <param name="commandName"></param>
+        /// <returns></returns>
+        public virtual ICommand GetCommand(string commandName)
+        {
+            return CommandFactory.GetCommand(commandName);
+        }
+
+        /// <summary>
         /// Initiate a federated sign out if supported (Idp supports it and sp has a configured
         /// signing certificate)
         /// </summary>
         /// <param name="properties">Authentication props, containing a return url.</param>
         /// <returns>Task</returns>
-        public async Task SignOutAsync(AuthenticationProperties properties)
+        public virtual async Task SignOutAsync(AuthenticationProperties properties)
         {
             if (properties == null)
             {
