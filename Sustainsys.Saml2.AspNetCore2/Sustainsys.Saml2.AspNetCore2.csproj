@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net47;net461</TargetFrameworks>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <PackageReleaseNotes>$releaseNotes$</PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Sustainsys/Saml2</PackageProjectUrl>
@@ -20,6 +20,7 @@
     <Authors>Sustainsys</Authors>
     <PackageId>Sustainsys.Saml2.AspNetCore2.Fork</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>2.7.0.1</Version>
   </PropertyGroup>
 
 
