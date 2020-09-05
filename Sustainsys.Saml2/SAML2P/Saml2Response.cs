@@ -463,7 +463,7 @@ namespace Sustainsys.Saml2.Saml2P
                 {
                     try
                     {
-                        assertions.AddRange(encryptedAssertions.Decrypt(serviceCertificate.PrivateKey)
+                        assertions.AddRange(DecryptXmlElements(encryptedAssertions, serviceCertificate.PrivateKey)
                                 .Select(xe => (XmlElement)xe.GetElementsByTagName("Assertion", Saml2Namespaces.Saml2Name)[0]));
                         decrypted = true;
                         break;
@@ -481,6 +481,48 @@ namespace Sustainsys.Saml2.Saml2P
             }
 
             return assertions;
+        }
+
+        /// <summary>
+        /// IF added.
+        /// </summary>
+        /// <param name="elements"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        internal IEnumerable<XmlElement> DecryptXmlElements(IEnumerable<XmlElement> elements, AsymmetricAlgorithm key)
+        {
+            foreach (var element in elements)
+            {
+                yield return DecryptXmlElement(element, key);
+            }
+        }
+
+        /// <summary>
+        /// IF added.
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public virtual XmlElement DecryptXmlElement(XmlElement element, AsymmetricAlgorithm key)
+        {
+            var xmlDoc = XmlHelpers.XmlDocumentFromString(element.OuterXml);
+
+            var exml = GetEncryptedXml(key, xmlDoc);
+
+            exml.DecryptDocument();
+
+            return xmlDoc.DocumentElement;
+        }
+
+        /// <summary>
+        /// IF added.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="xmlDoc"></param>
+        /// <returns></returns>
+        public virtual EncryptedXml GetEncryptedXml(AsymmetricAlgorithm key, XmlDocument xmlDoc)
+        {
+            return new RSAEncryptedXml(xmlDoc, (RSA)key);
         }
 
         private static IEnumerable<X509Certificate2> GetCertificatesValidForDecryption(IOptions options)

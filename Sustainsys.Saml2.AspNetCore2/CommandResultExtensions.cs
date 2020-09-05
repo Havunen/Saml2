@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Sustainsys.Saml2.AspNetCore2
 {
-    static class CommandResultExtensions
+    public static class CommandResultExtensions
     {
         public static async Task Apply(
             this CommandResult commandResult,

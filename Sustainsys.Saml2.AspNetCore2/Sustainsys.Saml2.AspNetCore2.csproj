@@ -18,6 +18,8 @@
 
   <PropertyGroup>
     <Authors>Sustainsys</Authors>
+    <PackageId>Sustainsys.Saml2.AspNetCore2.Fork</PackageId>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
 
