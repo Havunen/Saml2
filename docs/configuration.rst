@@ -3,8 +3,8 @@ Configuration
 To use Sustainsys.Saml2 in an application and configure it in ``web.config``
 (which is the default for the ``HttpModule`` and ``MVC`` libraries) it must be **enabled**
 in the application's ``web.config``. The sample applications contains complete
-working `web.config <https://github.com/Sustainsys/Saml2/blob/master/Samples/SampleHttpModuleApplication/Web.config>`_ examples. For 
-ASP.NET MVC applications see `this working web.config <https://github.com/Sustainsys/Saml2/blob/master/Samples/SampleMvcApplication/Web.config>`_
+working `web.config <https://github.com/Sustainsys/Saml2/blob/v2/Samples/SampleHttpModuleApplication/Web.config>`_ examples. For 
+ASP.NET MVC applications see `this working web.config <https://github.com/Sustainsys/Saml2/blob/v2/Samples/SampleMvcApplication/Web.config>`_
 example. 
 
 .. note::
@@ -13,6 +13,10 @@ example.
     in code and in that case no web.config changes are needed. If an Owin library
     is set up to use web.config (by passing ``true`` to the ``Saml2AuthenticationOptions`` 
     constructor) the information here applies.
+
+.. note::
+    Applications on Asp.Net Core do not support web.config. Use the ``Saml2Options`` class
+    directly.
 
 Config Sections
 ---------------

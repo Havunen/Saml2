@@ -466,16 +466,19 @@ namespace Sustainsys.Saml2.Saml2P
                         assertions.AddRange(DecryptXmlElements(encryptedAssertions, serviceCertificate.PrivateKey)
                                 .Select(xe => (XmlElement)xe.GetElementsByTagName("Assertion", Saml2Namespaces.Saml2Name)[0]));
                         decrypted = true;
+                        options.SPOptions.Logger.WriteVerbose($"Assertion decryption succeeded using {serviceCertificate.Thumbprint}");
                         break;
                     }
-                    catch (CryptographicException)
+                    catch (CryptographicException ex)
                     {
+                        options.SPOptions.Logger.WriteVerbose($"Assertion decryption using {serviceCertificate.Thumbprint} failed: {ex.Message}");
                         // we cannot depend on Idp's sending KeyInfo, so this is the only 
                         // reliable way to know we've got the wrong cert
                     }
                 }
                 if (!decrypted)
                 {
+
                     throw new Saml2ResponseFailedValidationException("Encrypted Assertion(s) could not be decrypted using the configured Service Certificate(s).");
                 }
             }
@@ -573,7 +576,7 @@ namespace Sustainsys.Saml2.Saml2P
             {
                 throw new Saml2ResponseFailedValidationException("The SAML Response is not signed and contains unsigned Assertions. Response cannot be trusted.");
             }
-            options.SPOptions.Logger.WriteVerbose("Signature validation passed for Saml Response " + Id);
+            options.SPOptions.Logger.WriteVerbose("Signature validation passed for Saml Response " + Id.Value);
         }
 
         private readonly Uri audience;
