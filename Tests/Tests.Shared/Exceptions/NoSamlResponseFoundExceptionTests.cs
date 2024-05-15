@@ -14,6 +14,9 @@ namespace Sustainsys.Saml2.Tests.Exceptions
             ExceptionTestHelpers.TestDefaultCtor<NoSamlResponseFoundException>();
         }
 
+        // JNi 2024-04-15: Binary Serialization and classes used in the mentioned
+        // serialization constructor are obsolete in NET 8 -> Do not do this.
+        [Ignore]
         [TestMethod]
         public void NoSamlResponseFoundException_SerializationCtor()
         {

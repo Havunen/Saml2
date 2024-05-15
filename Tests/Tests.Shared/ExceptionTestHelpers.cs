@@ -28,25 +28,29 @@ namespace Sustainsys.Saml2.Tests
         public static void TestSerializationCtor<TException>()
             where TException : Exception, new()
         {
-            var original = new TException();
-            var msg = "Some Message";
-            typeof(Exception).GetField("_message",
-                BindingFlags.NonPublic | BindingFlags.Instance)
-                .SetValue(original, msg);
+            throw new NotImplementedException(
+                "JNi 2024-04-15: Binary Serialization and classes " +
+                "used in the mentioned serialization constructor " +
+                "are obsolete in NET 8 -> Do not do this.");
+            //var original = new TException();
+            //var msg = "Some Message";
+            //typeof(Exception).GetField("_message",
+            //    BindingFlags.NonPublic | BindingFlags.Instance)
+            //    .SetValue(original, msg);
 
-            using (var ms = new MemoryStream())
-            {
-                var formatter = new BinaryFormatter();
+            //using (var ms = new MemoryStream())
+            //{
+            //    var formatter = new BinaryFormatter();
 
-                formatter.Serialize(ms, original);
+            //    formatter.Serialize(ms, original);
 
-                ms.Seek(0, SeekOrigin.Begin);
+            //    ms.Seek(0, SeekOrigin.Begin);
 
-                var deserialized = (TException)formatter.Deserialize(ms);
+            //    var deserialized = (TException)formatter.Deserialize(ms);
 
-                deserialized.Message.Should().Be(msg);
-                deserialized.Should().BeEquivalentTo(original);
-            }
+            //    deserialized.Message.Should().Be(msg);
+            //    deserialized.Should().BeEquivalentTo(original);
+            //}
 
         }
     }
