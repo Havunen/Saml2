@@ -20,7 +20,7 @@
     <Authors>Sustainsys</Authors>
     <PackageId>Sustainsys.Saml2.AspNetCore2.Fork</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.7.0.0</Version>
+    <Version>2.9.2.0</Version>
   </PropertyGroup>
 
   <ItemGroup Condition="('$(TargetFrameworkIdentifier)' == '.NETCoreApp' And $([MSBuild]::VersionGreaterThanOrEquals($(TargetFrameworkVersion), '6.0')))">
