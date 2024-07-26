@@ -50,10 +50,7 @@ namespace Sustainsys.Saml2.WebSso
 
                     options.Notifications.MessageUnbound(unbindResult);
 
-                    // JNi 2024-05-13: Before merge we used to have
-                    // var samlResponse = GetSaml2Response(request, options, unbindResult);
-                    // it got overridden with this in the merge:
-                    var samlResponse = new Saml2Response(unbindResult.Data, request.StoredRequestState?.MessageId, options);
+                    var samlResponse = this.GetSaml2Response(request, options, unbindResult);
 
                     var idpContext = GetIdpContext(unbindResult.Data, request, options);
 
