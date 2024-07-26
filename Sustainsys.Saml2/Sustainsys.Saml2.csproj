@@ -23,7 +23,7 @@
   <PropertyGroup>
     <NoWarn>1701;1702;1591</NoWarn>
     <Authors>Sustainsys</Authors>
-    <Version>2.9.2.0</Version>
+    <Version>2.9.2.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Sustainsys.Saml2.Fork</PackageId>
   </PropertyGroup>
@@ -47,9 +47,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.IdentityModel.Protocols" Version="7.5.2" />
-    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="7.5.2" />
-    <PackageReference Include="Microsoft.IdentityModel.Tokens.Saml" Version="7.5.2" />
+    <PackageReference Include="Microsoft.IdentityModel.Protocols" Version="8.0.1" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.0.1" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens.Saml" Version="8.0.1" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
     <PackageReference Include="System.Security.Cryptography.Xml" Version="8.0.1" />
   </ItemGroup>
